@@ -1,16 +1,19 @@
 package com.example.reactssr.service;
 
+import com.example.reactssr.data.Dummydata;
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Engine;
 import org.graalvm.polyglot.Source;
 import org.graalvm.polyglot.Value;
 import org.graalvm.polyglot.io.IOAccess;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,14 +21,16 @@ import static com.example.reactssr.service.JsRunnerService.getRoot;
 
 @Service
 public class NodeEnvironmentService {
-
     private final Engine engine;
+
+    @Autowired
+    Dummydata dummydata;
 
     public NodeEnvironmentService() {
         this.engine = Engine.newBuilder("js").build();
     }
 
-    public String testConsole() {
+    public String testConsole(String route) {
         try (Context context = createContext()) {
 
             injectNodeGlobals(context);
@@ -45,18 +50,17 @@ public class NodeEnvironmentService {
             System.out.println(result.asString());
             String js = Files.readString(Path.of("/Users/arun-16756/Downloads/reactssr/src/react/dist/ssr.cjs"));
             context.eval(Source.newBuilder("js", js, "ssr.js").build());
-            Value renderFn =
-                    context.getBindings("js").getMember("render");
+            Value renderFn = context.getBindings("js").getMember("render");
 
-            Map<String, Object> props = new HashMap<>();
-            props.put("productName", "t shirt");
-            props.put("message", "oversize t shirt for mens");
-            ObjectMapper objectMapper = new ObjectMapper();
-            String s = objectMapper.writeValueAsString(props);
-            Value html = renderFn.execute(s);
-            System.out.printf(html.asString());
+            Value renderedHtml = renderFn.execute(route);
 
-            return html.asString();
+            Path templatePath = Paths.get("src/main/resources/META-INF/resources/index.html");
+            String template = Files.readString(templatePath);
+
+            String fullHtml = template.replace("<!--app-html-->", renderedHtml.asString());
+            fullHtml = fullHtml.replace("<!--app-init-data-->", " <script id=\"__INIT_DATA__\"  type=\"application/json\">"+ route + "</script>");
+
+            return fullHtml;
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -82,26 +86,15 @@ public class NodeEnvironmentService {
 
         // process
         context.eval("js", """
-        globalThis.process = { env: { NODE_ENV: "development" } };
-        globalThis.global = globalThis;
-    """);
-
-        // Buffer
-        context.eval("js", """
-        const buffer = require("buffer");
-        globalThis.Buffer = buffer.Buffer;
-    """);
-
-        // TextEncoder from util (NODE WAY)
-        context.eval("js", """
-        const util = require("util");
-        globalThis.TextEncoder = util.TextEncoder;
-        globalThis.TextDecoder = util.TextDecoder;
-    """);
-
-        // console
-        context.eval("js", """
-        globalThis.console = console;
+            globalThis.Buffer = require('buffer').Buffer;
+            globalThis.URL = require('whatwg-url-without-unicode').URL;
+            globalThis.process = {
+                env: {
+                    NODE_ENV: 'production'
+                }
+            };
+            globalThis.document = {};
+            global = globalThis;
     """);
     }
 
