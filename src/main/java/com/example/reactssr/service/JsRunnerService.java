@@ -34,7 +34,6 @@ public class JsRunnerService {
 
         String polyfillPath;
         try (Context context = Context.newBuilder("js")
-                // set the engine to a context to ensure optimized code is cached
                 .engine(engine)
                 .allowIO(IOAccess.ALL)
                 .allowExperimentalOptions(true)
@@ -47,7 +46,6 @@ public class JsRunnerService {
         ) {
 
             // Polyfills
-
             Source globalSource = Source.create("js", """
 
 				globalThis.process = {
@@ -89,12 +87,10 @@ public class JsRunnerService {
         return fileCache.computeIfAbsent(root, key -> {
             try {
                 if (NativeDetector.inNativeImage()) {
-                    // in native image
                     return copyResources(root).toFile();
                 }
                 ClassPathResource resource = new ClassPathResource(root);
                 if (resource.getURL().toString().startsWith("jar:")) {
-                    // in jar file
                     return new FileSystemResource("./target/classes/" + root).getFile();
                 }
                 else {

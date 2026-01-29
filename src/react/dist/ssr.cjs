@@ -1380,7 +1380,7 @@ var require_react_development = __commonJS({
           }
           return dispatcher.useContext(Context);
         }
-        function useState(initialState) {
+        function useState2(initialState) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useState(initialState);
         }
@@ -2182,7 +2182,7 @@ var require_react_development = __commonJS({
         exports2.useMemo = useMemo;
         exports2.useReducer = useReducer;
         exports2.useRef = useRef;
-        exports2.useState = useState;
+        exports2.useState = useState2;
         exports2.useSyncExternalStore = useSyncExternalStore;
         exports2.useTransition = useTransition;
         exports2.version = ReactVersion;
@@ -5665,10 +5665,10 @@ var require_react_dom_server_legacy_node_development = __commonJS({
     if (process.env.NODE_ENV !== "production") {
       (function() {
         "use strict";
-        var React3 = require_react();
+        var React5 = require_react();
         var stream = require("stream");
         var ReactVersion = "18.2.0";
-        var ReactSharedInternals = React3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+        var ReactSharedInternals = React5.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
         function warn(format) {
           {
             {
@@ -7564,7 +7564,7 @@ var require_react_dom_server_legacy_node_development = __commonJS({
         }
         function flattenOptionChildren(children) {
           var content = "";
-          React3.Children.forEach(children, function(child) {
+          React5.Children.forEach(children, function(child) {
             if (child == null) {
               return;
             }
@@ -9558,7 +9558,7 @@ var require_react_dom_server_legacy_node_development = __commonJS({
         function basicStateReducer(state, action) {
           return typeof action === "function" ? action(state) : action;
         }
-        function useState(initialState) {
+        function useState2(initialState) {
           {
             currentHookNameInDev = "useState";
           }
@@ -9740,7 +9740,7 @@ var require_react_dom_server_legacy_node_development = __commonJS({
           useMemo,
           useReducer,
           useRef,
-          useState,
+          useState: useState2,
           useInsertionEffect: noop,
           useLayoutEffect,
           useCallback,
@@ -11062,10 +11062,10 @@ var require_react_dom_server_node_development = __commonJS({
     if (process.env.NODE_ENV !== "production") {
       (function() {
         "use strict";
-        var React3 = require_react();
+        var React5 = require_react();
         var util = require("util");
         var ReactVersion = "18.2.0";
-        var ReactSharedInternals = React3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+        var ReactSharedInternals = React5.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
         function warn(format) {
           {
             {
@@ -13058,7 +13058,7 @@ var require_react_dom_server_node_development = __commonJS({
         }
         function flattenOptionChildren(children) {
           var content = "";
-          React3.Children.forEach(children, function(child) {
+          React5.Children.forEach(children, function(child) {
             if (child == null) {
               return;
             }
@@ -14988,7 +14988,7 @@ var require_react_dom_server_node_development = __commonJS({
         function basicStateReducer(state, action) {
           return typeof action === "function" ? action(state) : action;
         }
-        function useState(initialState) {
+        function useState2(initialState) {
           {
             currentHookNameInDev = "useState";
           }
@@ -15170,7 +15170,7 @@ var require_react_dom_server_node_development = __commonJS({
           useMemo,
           useReducer,
           useRef,
-          useState,
+          useState: useState2,
           useInsertionEffect: noop,
           useLayoutEffect,
           useCallback,
@@ -16462,21 +16462,253 @@ var require_server_node = __commonJS({
 });
 
 // src/index.js
-var import_react2 = __toESM(require_react(), 1);
+var import_react4 = __toESM(require_react(), 1);
 var import_server = __toESM(require_server_node(), 1);
 
 // src/app.jsx
+var import_react3 = __toESM(require_react(), 1);
+
+// src/compoents/invoices.jsx
 var import_react = __toESM(require_react(), 1);
+function Invoices(props) {
+  const invoices = props.invoices;
+  const navigate = (path) => {
+    window.location.href = path;
+  };
+  return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h1", null, "Invoices"), /* @__PURE__ */ import_react.default.createElement("table", { style: { width: "100%", borderCollapse: "collapse" } }, /* @__PURE__ */ import_react.default.createElement("thead", null, /* @__PURE__ */ import_react.default.createElement("tr", null, /* @__PURE__ */ import_react.default.createElement("th", { style: { textAlign: "start", padding: "8px", border: "1px solid #ddd", width: "60px", minWidth: "60px" } }, /* @__PURE__ */ import_react.default.createElement("input", { type: "checkbox", "aria-label": "Select all rows" })), /* @__PURE__ */ import_react.default.createElement("th", { style: { textAlign: "start", padding: "8px", border: "1px solid #ddd" } }, "Date"), /* @__PURE__ */ import_react.default.createElement("th", { style: { textAlign: "start", padding: "8px", border: "1px solid #ddd" } }, "Invoice#"), /* @__PURE__ */ import_react.default.createElement("th", { style: { textAlign: "start", padding: "8px", border: "1px solid #ddd" } }, "Order Number"), /* @__PURE__ */ import_react.default.createElement("th", { style: { textAlign: "start", padding: "8px", border: "1px solid #ddd" } }, "Customer Name"), /* @__PURE__ */ import_react.default.createElement("th", { style: { textAlign: "start", padding: "8px", border: "1px solid #ddd" } }, "Status"), /* @__PURE__ */ import_react.default.createElement("th", { style: { textAlign: "start", padding: "8px", border: "1px solid #ddd" } }, "Due Date"), /* @__PURE__ */ import_react.default.createElement("th", { style: { textAlign: "end", padding: "8px", border: "1px solid #ddd" } }, "Amount"), /* @__PURE__ */ import_react.default.createElement("th", { style: { textAlign: "end", padding: "8px", border: "1px solid #ddd", width: "197px" } }, "Balance Due"), /* @__PURE__ */ import_react.default.createElement("th", { style: { textAlign: "center", padding: "8px", border: "1px solid #ddd", width: "4%" } }, /* @__PURE__ */ import_react.default.createElement("button", { type: "button", "aria-label": "Advanced Search", style: { background: "none", border: "none", cursor: "pointer" } }, "\u{1F50D}")))), /* @__PURE__ */ import_react.default.createElement("tbody", null, invoices.map((invoice) => /* @__PURE__ */ import_react.default.createElement("tr", { key: invoice.invoice_id, onClick: () => navigate(`/invoices/1`) }, /* @__PURE__ */ import_react.default.createElement("td", { style: { textAlign: "start", padding: "8px", border: "1px solid #ddd" } }, /* @__PURE__ */ import_react.default.createElement("input", { type: "checkbox", "aria-label": "Select row" })), /* @__PURE__ */ import_react.default.createElement("td", { style: { textAlign: "start", padding: "8px", border: "1px solid #ddd" } }, invoice.date_formatted), /* @__PURE__ */ import_react.default.createElement("td", { style: { textAlign: "start", padding: "8px", border: "1px solid #ddd" } }, invoice.invoice_number), /* @__PURE__ */ import_react.default.createElement("td", { style: { textAlign: "start", padding: "8px", border: "1px solid #ddd" } }, invoice.reference_number || "-"), /* @__PURE__ */ import_react.default.createElement("td", { style: { textAlign: "start", padding: "8px", border: "1px solid #ddd" } }, invoice.customer_name), /* @__PURE__ */ import_react.default.createElement("td", { style: { textAlign: "start", padding: "8px", border: "1px solid #ddd" } }, invoice.status_formatted), /* @__PURE__ */ import_react.default.createElement("td", { style: { textAlign: "start", padding: "8px", border: "1px solid #ddd" } }, invoice.due_date_formatted), /* @__PURE__ */ import_react.default.createElement("td", { style: { textAlign: "end", padding: "8px", border: "1px solid #ddd" } }, invoice.total_formatted), /* @__PURE__ */ import_react.default.createElement("td", { style: { textAlign: "end", padding: "8px", border: "1px solid #ddd" } }, invoice.balance_formatted), /* @__PURE__ */ import_react.default.createElement("td", { style: { textAlign: "center", padding: "8px", border: "1px solid #ddd" } }))))));
+}
+
+// src/compoents/invoice.jsx
+var import_react2 = __toESM(require_react(), 1);
+function Invoice(props) {
+  const invoiceId = props?.invoiceId || props?.invoice_id;
+  const findInvoiceById = () => {
+    if (props?.invoice) {
+      return props.invoice;
+    }
+    if (invoiceId && props?.invoices && Array.isArray(props.invoices)) {
+      return props.invoices.find((inv) => inv.invoice_id === invoiceId || inv.invoice_id === String(invoiceId));
+    }
+    return null;
+  };
+  const initialInvoice = findInvoiceById();
+  const [add, setAdd] = (0, import_react2.useState)(1);
+  const [isEditing, setIsEditing] = (0, import_react2.useState)(false);
+  const [invoice, setInvoice] = (0, import_react2.useState)(initialInvoice);
+  const [editedData, setEditedData] = (0, import_react2.useState)({
+    customer_name: initialInvoice?.customer_name || "",
+    reference_number: initialInvoice?.reference_number || "",
+    date: initialInvoice?.date || "",
+    due_date: initialInvoice?.due_date || "",
+    total: initialInvoice?.total || 0,
+    status: initialInvoice?.status || "draft"
+  });
+  if (!invoice) {
+    return /* @__PURE__ */ import_react2.default.createElement("div", { style: { padding: "40px", textAlign: "center" } }, /* @__PURE__ */ import_react2.default.createElement("h1", { style: { color: "#dc3545", marginBottom: "10px" } }, "Invoice Not Found"), /* @__PURE__ */ import_react2.default.createElement("p", { style: { color: "#666" } }, "The invoice you're looking for doesn't exist."));
+  }
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+  const handleCancel = () => {
+    setEditedData({
+      customer_name: invoice.customer_name || "",
+      reference_number: invoice.reference_number || "",
+      date: invoice.date || "",
+      due_date: invoice.due_date || "",
+      total: invoice.total || 0,
+      status: invoice.status || "draft"
+    });
+    setIsEditing(false);
+  };
+  const handleSave = () => {
+    const updatedInvoice = {
+      ...invoice,
+      customer_name: editedData.customer_name,
+      reference_number: editedData.reference_number,
+      date: editedData.date,
+      due_date: editedData.due_date,
+      total: editedData.total,
+      status: editedData.status,
+      status_formatted: editedData.status.charAt(0).toUpperCase() + editedData.status.slice(1),
+      date_formatted: formatDate(editedData.date),
+      due_date_formatted: formatDate(editedData.due_date),
+      total_formatted: `\u20B9${parseFloat(editedData.total).toFixed(2)}`,
+      last_modified_time: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    setInvoice(updatedInvoice);
+    setIsEditing(false);
+    console.log("Saving invoice:", updatedInvoice);
+  };
+  const handleChange = (field, value) => {
+    setEditedData((prev) => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+  const formatDate = (dateString) => {
+    if (!dateString)
+      return "";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-GB");
+  };
+  const containerStyle = {
+    maxWidth: "1000px",
+    margin: "0 auto",
+    padding: "30px 20px",
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    backgroundColor: "#f8f9fa",
+    minHeight: "100vh"
+  };
+  const headerStyle = {
+    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    color: "white",
+    padding: "25px 30px",
+    borderRadius: "8px",
+    marginBottom: "30px",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  };
+  const cardStyle = {
+    backgroundColor: "white",
+    padding: "25px",
+    borderRadius: "8px",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+    marginBottom: "20px",
+    border: "1px solid #e9ecef"
+  };
+  const buttonStyle = {
+    padding: "10px 20px",
+    borderRadius: "6px",
+    border: "none",
+    cursor: "pointer",
+    fontSize: "14px",
+    fontWeight: "500",
+    transition: "all 0.3s ease",
+    marginLeft: "10px"
+  };
+  const primaryButton = {
+    ...buttonStyle,
+    backgroundColor: "#007bff",
+    color: "white"
+  };
+  const successButton = {
+    ...buttonStyle,
+    backgroundColor: "#28a745",
+    color: "white"
+  };
+  const dangerButton = {
+    ...buttonStyle,
+    backgroundColor: "#dc3545",
+    color: "white"
+  };
+  const secondaryButton = {
+    ...buttonStyle,
+    backgroundColor: "#6c757d",
+    color: "white"
+  };
+  const inputStyle = {
+    width: "100%",
+    padding: "10px",
+    borderRadius: "6px",
+    border: "1px solid #ced4da",
+    fontSize: "14px",
+    marginTop: "5px",
+    boxSizing: "border-box"
+  };
+  const labelStyle = {
+    display: "block",
+    marginBottom: "15px",
+    color: "#495057",
+    fontSize: "14px"
+  };
+  const statusBadgeStyle = {
+    display: "inline-block",
+    padding: "6px 12px",
+    borderRadius: "20px",
+    fontSize: "12px",
+    fontWeight: "600",
+    textTransform: "uppercase",
+    backgroundColor: invoice.status === "draft" ? "#ffc107" : invoice.status === "sent" ? "#17a2b8" : "#28a745",
+    color: invoice.status === "draft" ? "#000" : "#fff"
+  };
+  return /* @__PURE__ */ import_react2.default.createElement("div", { style: containerStyle }, /* @__PURE__ */ import_react2.default.createElement("div", { style: headerStyle }, /* @__PURE__ */ import_react2.default.createElement("div", null, /* @__PURE__ */ import_react2.default.createElement("h1", { style: { margin: "0 0 10px 0", fontSize: "28px" } }, invoice.invoice_number), /* @__PURE__ */ import_react2.default.createElement("div", { style: statusBadgeStyle }, invoice.status_formatted)), /* @__PURE__ */ import_react2.default.createElement("div", null, !isEditing ? /* @__PURE__ */ import_react2.default.createElement("button", { onClick: handleEdit, style: primaryButton, onMouseOver: (e) => e.target.style.backgroundColor = "#0056b3", onMouseOut: (e) => e.target.style.backgroundColor = "#007bff" }, "\u270F\uFE0F Edit Invoice") : /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, /* @__PURE__ */ import_react2.default.createElement("button", { onClick: handleSave, style: successButton, onMouseOver: (e) => e.target.style.backgroundColor = "#218838", onMouseOut: (e) => e.target.style.backgroundColor = "#28a745" }, "\u{1F4BE} Save Changes"), /* @__PURE__ */ import_react2.default.createElement("button", { onClick: handleCancel, style: secondaryButton, onMouseOver: (e) => e.target.style.backgroundColor = "#5a6268", onMouseOut: (e) => e.target.style.backgroundColor = "#6c757d" }, "\u274C Cancel")))), /* @__PURE__ */ import_react2.default.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" } }, /* @__PURE__ */ import_react2.default.createElement("div", { style: cardStyle }, /* @__PURE__ */ import_react2.default.createElement("h3", { style: { marginTop: "0", color: "#495057", borderBottom: "2px solid #e9ecef", paddingBottom: "10px" } }, "Invoice Information"), isEditing ? /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, /* @__PURE__ */ import_react2.default.createElement("label", { style: labelStyle }, /* @__PURE__ */ import_react2.default.createElement("strong", null, "Date:"), /* @__PURE__ */ import_react2.default.createElement(
+    "input",
+    {
+      type: "date",
+      value: editedData.date,
+      onChange: (e) => handleChange("date", e.target.value),
+      style: inputStyle
+    }
+  )), /* @__PURE__ */ import_react2.default.createElement("label", { style: labelStyle }, /* @__PURE__ */ import_react2.default.createElement("strong", null, "Due Date:"), /* @__PURE__ */ import_react2.default.createElement(
+    "input",
+    {
+      type: "date",
+      value: editedData.due_date,
+      onChange: (e) => handleChange("due_date", e.target.value),
+      style: inputStyle
+    }
+  )), /* @__PURE__ */ import_react2.default.createElement("label", { style: labelStyle }, /* @__PURE__ */ import_react2.default.createElement("strong", null, "Order Number:"), /* @__PURE__ */ import_react2.default.createElement(
+    "input",
+    {
+      type: "text",
+      value: editedData.reference_number,
+      onChange: (e) => handleChange("reference_number", e.target.value),
+      style: inputStyle,
+      placeholder: "Enter order number"
+    }
+  ))) : /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, /* @__PURE__ */ import_react2.default.createElement("p", { style: { marginBottom: "12px" } }, /* @__PURE__ */ import_react2.default.createElement("strong", { style: { color: "#6c757d" } }, "Date:"), " ", /* @__PURE__ */ import_react2.default.createElement("span", { style: { color: "#212529" } }, invoice.date_formatted)), /* @__PURE__ */ import_react2.default.createElement("p", { style: { marginBottom: "12px" } }, /* @__PURE__ */ import_react2.default.createElement("strong", { style: { color: "#6c757d" } }, "Due Date:"), " ", /* @__PURE__ */ import_react2.default.createElement("span", { style: { color: "#212529" } }, invoice.due_date_formatted)), /* @__PURE__ */ import_react2.default.createElement("p", { style: { marginBottom: "12px" } }, /* @__PURE__ */ import_react2.default.createElement("strong", { style: { color: "#6c757d" } }, "Order Number:"), " ", /* @__PURE__ */ import_react2.default.createElement("span", { style: { color: "#212529" } }, invoice.reference_number || "N/A")), /* @__PURE__ */ import_react2.default.createElement("p", { style: { marginBottom: "12px" } }, /* @__PURE__ */ import_react2.default.createElement("strong", { style: { color: "#6c757d" } }, "Type:"), " ", /* @__PURE__ */ import_react2.default.createElement("span", { style: { color: "#212529" } }, invoice.type_formatted)))), /* @__PURE__ */ import_react2.default.createElement("div", { style: cardStyle }, /* @__PURE__ */ import_react2.default.createElement("h3", { style: { marginTop: "0", color: "#495057", borderBottom: "2px solid #e9ecef", paddingBottom: "10px" } }, "Customer Information"), isEditing ? /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, /* @__PURE__ */ import_react2.default.createElement("label", { style: labelStyle }, /* @__PURE__ */ import_react2.default.createElement("strong", null, "Customer Name:"), /* @__PURE__ */ import_react2.default.createElement(
+    "input",
+    {
+      type: "text",
+      value: editedData.customer_name,
+      onChange: (e) => handleChange("customer_name", e.target.value),
+      style: inputStyle,
+      placeholder: "Enter customer name"
+    }
+  )), /* @__PURE__ */ import_react2.default.createElement("p", { style: { marginBottom: "12px", color: "#6c757d" } }, /* @__PURE__ */ import_react2.default.createElement("strong", null, "Customer ID:"), " ", /* @__PURE__ */ import_react2.default.createElement("span", { style: { color: "#212529" } }, invoice.customer_id))) : /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, /* @__PURE__ */ import_react2.default.createElement("p", { style: { marginBottom: "12px" } }, /* @__PURE__ */ import_react2.default.createElement("strong", { style: { color: "#6c757d" } }, "Customer Name:"), " ", /* @__PURE__ */ import_react2.default.createElement("span", { style: { color: "#212529" } }, invoice.customer_name)), /* @__PURE__ */ import_react2.default.createElement("p", { style: { marginBottom: "12px" } }, /* @__PURE__ */ import_react2.default.createElement("strong", { style: { color: "#6c757d" } }, "Customer ID:"), " ", /* @__PURE__ */ import_react2.default.createElement("span", { style: { color: "#212529" } }, invoice.customer_id))))), /* @__PURE__ */ import_react2.default.createElement("div", { style: cardStyle }, /* @__PURE__ */ import_react2.default.createElement("h3", { style: { marginTop: "0", color: "#495057", borderBottom: "2px solid #e9ecef", paddingBottom: "10px" } }, "Financial Details"), isEditing ? /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, /* @__PURE__ */ import_react2.default.createElement("label", { style: labelStyle }, /* @__PURE__ */ import_react2.default.createElement("strong", null, "Total Amount (\u20B9):"), /* @__PURE__ */ import_react2.default.createElement(
+    "input",
+    {
+      type: "number",
+      step: "0.01",
+      value: editedData.total,
+      onChange: (e) => handleChange("total", parseFloat(e.target.value) || 0),
+      style: inputStyle,
+      placeholder: "Enter total amount"
+    }
+  )), /* @__PURE__ */ import_react2.default.createElement("label", { style: labelStyle }, /* @__PURE__ */ import_react2.default.createElement("strong", null, "Status:"), /* @__PURE__ */ import_react2.default.createElement(
+    "select",
+    {
+      value: editedData.status,
+      onChange: (e) => handleChange("status", e.target.value),
+      style: inputStyle
+    },
+    /* @__PURE__ */ import_react2.default.createElement("option", { value: "draft" }, "Draft"),
+    /* @__PURE__ */ import_react2.default.createElement("option", { value: "sent" }, "Sent"),
+    /* @__PURE__ */ import_react2.default.createElement("option", { value: "paid" }, "Paid"),
+    /* @__PURE__ */ import_react2.default.createElement("option", { value: "overdue" }, "Overdue")
+  ))) : /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, /* @__PURE__ */ import_react2.default.createElement("p", { style: { marginBottom: "12px" } }, /* @__PURE__ */ import_react2.default.createElement("strong", { style: { color: "#6c757d" } }, "Total Amount:"), " ", /* @__PURE__ */ import_react2.default.createElement("span", { style: { color: "#212529", fontSize: "18px", fontWeight: "600" } }, invoice.total_formatted)), /* @__PURE__ */ import_react2.default.createElement("p", { style: { marginBottom: "12px" } }, /* @__PURE__ */ import_react2.default.createElement("strong", { style: { color: "#6c757d" } }, "Balance Due:"), " ", /* @__PURE__ */ import_react2.default.createElement("span", { style: { color: "#212529", fontSize: "18px", fontWeight: "600" } }, invoice.balance_formatted)), /* @__PURE__ */ import_react2.default.createElement("p", { style: { marginBottom: "12px" } }, /* @__PURE__ */ import_react2.default.createElement("strong", { style: { color: "#6c757d" } }, "Unprocessed Payment:"), " ", /* @__PURE__ */ import_react2.default.createElement("span", { style: { color: "#212529" } }, invoice.unprocessed_payment_amount_formatted)))), /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, /* @__PURE__ */ import_react2.default.createElement("h1", null, "Add"), /* @__PURE__ */ import_react2.default.createElement("button", { onClick: () => setAdd(add + 1) }, "Add"), /* @__PURE__ */ import_react2.default.createElement("h1", null, add)));
+}
+
+// src/app.jsx
 function App(props) {
-  console.log("Props in App:", props);
-  return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h1", null, "Hello React from GraalVM \u{1F44B}"), /* @__PURE__ */ import_react.default.createElement("h1", null, "Product: ", props.productName), /* @__PURE__ */ import_react.default.createElement("p", null, props.message));
+  const route = props?.route || props?.path || "/invoices";
+  if (route === "/invoices" || route.startsWith("/invoices")) {
+    return /* @__PURE__ */ import_react3.default.createElement(Invoices, { ...props });
+  }
+  if (route === "/invoice" || route.startsWith("/invoice/")) {
+    const invoiceId = route.split("/invoice/")[1] || props?.invoiceId || props?.invoice_id;
+    return /* @__PURE__ */ import_react3.default.createElement(Invoice, { ...props, invoiceId });
+  }
+  return /* @__PURE__ */ import_react3.default.createElement(Invoices, { ...props });
 }
 
 // src/index.js
 function render(jsonString) {
   const props = JSON.parse(jsonString);
   console.log("Props in render:", props, typeof props);
-  return (0, import_server.renderToString)(import_react2.default.createElement(App, props));
+  return (0, import_server.renderToString)(import_react4.default.createElement(App, props));
 }
 globalThis.render = render;
 /*! Bundled license information:
